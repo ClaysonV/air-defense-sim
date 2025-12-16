@@ -10,19 +10,19 @@ The primary objective of this project is to visualize the efficacy of Proportion
 
 ## Simulation Interface
 The simulation outputs a multi-panel data visualization dashboard for real-time analysis:
-1. **3D Kinematic Display**
+### 1. **3D Kinematic Display**
 Visualizes the spatial relationship between the interceptor and the target in a 3D Cartesian coordinate system.
 * **State Estimation:** Displays both the measured state (raw sensor returns with Gaussian noise) and the estimated state (Kalman Filter output), effectively visualizing the noise reduction algorithm.
 * **Environmental Modeling:** Features a 3D terrain mesh and exponentially decaying atmospheric density visualization.
-2. Sensor Modeling (PPI Scope)
+### 2. Sensor Modeling (PPI Scope)
 Simulates a Plan Position Indicator (PPI) radar display.
 * **Signal-to-Noise Representation:** Demonstrates the impact of RCS on sensor resolution. Targets with low RCS (e.g., F-22) generate high-variance measurement scatter, while high-RCS targets (e.g., B-52) produce coherent return signals.
-3. Real-Time Telemetry
+### 3. Real-Time Telemetry
 Provides a numeric readout of critical flight parameters, including:
 * **Mach Number:** Dynamically calculated based on local speed of sound at altitude.
 * **G-Load:** Lateral acceleration loads applied to the airframe.
 * **System Status:** Guidance loop status (Searching vs. Locked).
-4. Intercept Analytics ($P_k$)
+### 4. Intercept Analytics ($P_k$)
 A real-time probability graph plotting the Probability of Kill ($P_k$) as a function of range, closing velocity, and tracker stability.
 
 ## Tech Stack
@@ -53,31 +53,35 @@ A real-time probability graph plotting the Probability of Kill ($P_k$) as a func
 
 2. **Scenario Configuration**
 The system will initialize the Asset Library. You will be prompted to configure the engagement parameters:
-* **Target Selection:** Choose from a database of fixed-wing aircraft, UAVs, and experimental concepts (parameterized by Cruise Speed, Max Speed, G-Limits, and RCS).
-* **Interceptor Selection:** Choose from a database of defensive systems (parameterized by Thrust, Burn Time, and Navigation Gain).
+    * **Target Selection:** Choose from a database of fixed-wing aircraft, UAVs, and experimental concepts (parameterized by Cruise Speed, Max Speed, G-Limits, and RCS).
+    * **Interceptor Selection:** Choose from a database of defensive systems (parameterized by Thrust, Burn Time, and Navigation Gain).
 
 3. **Simulation Loop**
-The simulation runs in real-time steps ($dt=0.05s$). The terminal will output event logs (Launch Detection, Intercept, Splash) while the dashboard visualizes the guidance solution.
+
+    The simulation runs in real-time steps ($dt=0.05s$). The terminal will output event logs (Launch Detection, Intercept, Splash) while the dashboard visualizes the guidance solution.
 
 ## Technical Specifications
-1. **Atmospheric Model**
+### 1. **Atmospheric Model**
 Air density ($\rho$) is modeled as an exponential decay function of altitude ($h$), influencing both drag forces and aerodynamic control authority.
 * $$\rho(h) = \rho_0 e^{-h/H}$$
 * $\rho_0$: Sea level air density ($1.225 \text{ kg/m}^3$).
 * $H$: Scale height ($\approx 8,500 \text{ m}$).
 
-2. **Aerodynamic Drag**
+### 2. **Aerodynamic Drag**
+
 Energy management is governed by the drag equation, creating a realistic trade-off between kinetic energy and maneuverability.
 * $$F_d = \frac{1}{2} \rho v^2 C_d A$$
 
-3. Guidance Law: Proportional Navigation (PN)
+### 3. **Guidance Law: Proportional Navigation (PN)**
+
 The interceptor utilizes True Proportional Navigation (TPN). The guidance command generates lateral acceleration ($\vec{a}_c$) proportional to the Line-of-Sight (LOS) rotation rate.
 * $$\vec{a}_c = N V_c \dot{\vec{\lambda}}$$
 * $N$: Navigation Constant (Gain).
 * $V_c$: Closing Velocity.
 * $\dot{\lambda}$: LOS Rotation Rate.
 
-4. Signal Processing: Linear Kalman Filter
+### 4. **Signal Processing: Linear Kalman Filter**
+
 To simulate electronic warfare environments, the system applies a Linear Kalman Filter (LKF) to estimate the state vector $\mathbf{x}$ (position and velocity) from noisy measurements $\mathbf{z}$.
 The measurement noise covariance $R$ is dynamically scaled inversely to the target's Radar Cross Section (RCS):
 * Low RCS: High Measurement Noise $\rightarrow$ Low Kalman Gain (Filter trusts model prediction).
