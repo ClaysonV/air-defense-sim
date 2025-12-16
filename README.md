@@ -40,7 +40,7 @@ A real-time probability graph plotting the Probability of Kill ($P_k$) as a func
 
 1.  **Clone the Repo**
     ```bash
-    git clone https://github.com/ClaysonV/air-defense-sim.git
+    git clone https://github.com/ClaysonV/Air_Defense_Simulator.git
     cd air-defense-sim
     ```
 
