@@ -25,6 +25,10 @@ Provides a numeric readout of critical flight parameters, including:
 ### 4. Intercept Analytics ($P_k$)
 A real-time probability graph plotting the Probability of Kill ($P_k$) as a function of range, closing velocity, and tracker stability.
 
+
+
+<img width="1920" height="1015" alt="Figure_1" src="https://github.com/user-attachments/assets/52bb8805-751d-428b-a448-7a1f83f6d442" />
+
 ## Tech Stack
 * **Python 3.10+**
 * **NumPy:** For high-performance vector calculus, matrix operations (Kalman Filtering), and physics calculations.
