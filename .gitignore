@@ -1,0 +1,20 @@
+# --- Python Basics ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# --- Virtual Environments ---
+# Based on your previous error, your venv is likely named 'venv'
+venv/
+env/
+.env
+.venv/
+
+# --- IDE Settings (Optional but recommended) ---
+.vscode/
+.idea/
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db
